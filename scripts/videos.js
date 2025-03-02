@@ -29,6 +29,16 @@ const loadVideos = () => {
         .catch((error) => console.log(error))
 };
 
+// for alert 
+const loadCategoryVideos = (id) => {
+    // alert(id);
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+        .then(res => res.json())
+        // .then((data) => console.log(data.category))
+        .then((data) => displayVideos(data.category))
+        .catch((error) => console.log(error))
+}
+
 // this is the object copied
 const cardDemo = {
     "category_id": "1001",
@@ -52,6 +62,7 @@ const cardDemo = {
 const displayVideos = (videos) => {
     // console.log(videos);
     const videoContainer = document.getElementById('videos');
+    videoContainer.innerHTML = "";
     videos.forEach((video) => {
         console.log(video);
         // card making
@@ -63,7 +74,7 @@ const displayVideos = (videos) => {
     <img
     class='h-full w-full object-cover'
       src= ${video.thumbnail} />
-      ${video.others.posted_date?.length == 0 ? "" : `<span class="absolute right-2 bottom-2 rounded p-1 bg-black text-white">${getTimeString(video.others.posted_date)}</span>`}
+      ${video.others.posted_date?.length == 0 ? "" : `<span class="absolute right-2 bottom-2 rounded p-1 bg-black text-white text-xs">${getTimeString(video.others.posted_date)}</span>`}
       
   </figure>
   <div class="px-0 py-2 gap-2 flex">
@@ -99,12 +110,16 @@ const displayCategories = (categories) => {
         console.log(item);
 
         //create a button
-        const button = document.createElement('button');
-        button.classList = 'btn';
-        button.innerText = item.category;
+        const buttonContainer = document.createElement('div');
+        buttonContainer.innerHTML =
+            ` <button onclick="loadCategoryVideos(${item.category_id})" class= 'btn'>
+            ${item.category}
+        </button>`;
+
+        // button.onclick = () => {alert("Hi")}
 
         // add button to category container
-        categoryContainer.append(button)
+        categoryContainer.append(buttonContainer)
 
     })
 
