@@ -63,6 +63,25 @@ const displayVideos = (videos) => {
     // console.log(videos);
     const videoContainer = document.getElementById('videos');
     videoContainer.innerHTML = "";
+
+    // content not found
+    if (videos.length == 0) {
+        // videoContainer.innerHTML = "No content here";
+
+        // for getting center we removed the grid from class-list of videoContainer
+        videoContainer.classList.remove("grid")
+        videoContainer.innerHTML =
+            `
+        <div class="min-h=[300px] flex flex-col gap-5 justify-center items-center">
+        <img src="assests/Icon.png" />
+        <h2 class="text-xl font-bold">No content available in this category</h2>
+        </div>
+        `
+        return;
+    } else {
+        videoContainer.classList.add("grid")
+    }
+
     videos.forEach((video) => {
         console.log(video);
         // card making
