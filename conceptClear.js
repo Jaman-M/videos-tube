@@ -14,12 +14,12 @@
 // after that we got 1.2 hour ago
 // but we don't want decimal
 
-function getTimeString(time){
-    const hour = parseInt(time/3600);
+function getTimeString(time) {
+    const hour = parseInt(time / 3600);
     let remainingSecond = parseInt(time % 3600);
     const minute = parseInt(remainingSecond / 60);
     remainingSecond = remainingSecond % 60;
-    return`${hour} hour ${minute} minutes ${remainingSecond} seconds ago`;
+    return `${hour} hour ${minute} minutes ${remainingSecond} seconds ago`;
 
 }
-console.log(getTimeString (7865));
+console.log(getTimeString(7865));
